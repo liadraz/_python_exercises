@@ -66,7 +66,8 @@ def space_check(board_, position_):
     """
     return: boolean. Is space available on position
     """
-    pass
+    return board_[position_] == ' '
+
 
 # full_board_check
 def full_board(board_):
