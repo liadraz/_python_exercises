@@ -74,7 +74,11 @@ def full_board(board_):
     """
     return: boolean. Checks if board is full
     """
-    pass
+    for i in range(0, 9):
+        if space_check(board_, i):
+            return False
+
+    return True
 
 
 # player choice
