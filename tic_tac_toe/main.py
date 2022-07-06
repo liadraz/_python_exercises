@@ -83,7 +83,14 @@ def full_board(board_):
 
 # player choice
 def player_choice(board_):
-    pass
+    acceptable_range = list(range(0, 9))
+    choice = 10
+
+    while choice not in acceptable_range or not space_check(board_, choice):
+        choice = int(input("Choose your next position: (0-9) "))
+
+    # NOTE choice is in range 1-9. Hence, the minus 1
+    return choice - 1
 
 
 # replay the game
