@@ -42,7 +42,15 @@ def place_marker(board_, marker_, position_):
 
 # win check
 def win_check(board_, mark_):
-    pass
+    # check wins in vertical, horizontal and in cross
+    return board_[0] == board_[1] == board_[2] == mark_ or \
+    board_[3] == board_[4] == board_[5] == mark_ or \
+    board_[6] == board_[7] == board_[8] == mark_ or \
+    board_[0] == board_[3] == board_[6] == mark_ or \
+    board_[1] == board_[4] == board_[7] == mark_ or \
+    board_[2] == board_[5] == board_[8] == mark_ or \
+    board_[6] == board_[4] == board_[2] == mark_ or \
+    board_[8] == board_[4] == board_[0] == mark_
 
 
 # choose who plays first
@@ -59,7 +67,6 @@ def space_check(board_, position_):
     return: boolean. Is space available on position
     """
     pass
-
 
 # full_board_check
 def full_board(board_):
