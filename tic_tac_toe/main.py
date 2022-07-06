@@ -95,7 +95,7 @@ def player_choice(board_):
 
 # replay the game
 def replay():
-    pass
+    return print(f"Do you want to play again? Enter Yes or No: ").lower.startwith('y')
 
 
 # main function - Run the game
