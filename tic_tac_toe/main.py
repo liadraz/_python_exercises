@@ -37,7 +37,7 @@ def player_input():
 
 # update board, place marker
 def place_marker(board_, marker_, position_):
-    pass
+    board_[position_] = marker_
 
 
 # win check
@@ -82,9 +82,10 @@ def replay():
 # main function - Run the game
 def run():
     print('Welcome to Tic Tac Toe')
-    is_run = True
+    is_round = True
 
-    while is_run:
+    # Start running rounds
+    while is_round:
 
         # Reset The board
         board = [' '] * 9
@@ -97,7 +98,14 @@ def run():
         print(f'{turn} will go first.')
 
         # Get input from the user to start the game
-        is_ready = input('Are yor ready to play? Enter yes or no. ')
 
-        input('Are you ready to play? Enter yes or no. ')
+        ask_ready = input('Are yor ready to play? Enter yes or no. ').lower()
+        if ask_ready[0] == 'y':
+            is_gmae_on = True
+        else:
+            is_gmae_on = False
+
+        # Start the game
+        while is_gmae_on:
+
 
