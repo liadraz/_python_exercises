@@ -24,9 +24,9 @@ g_values = {
 
 # CARD
 class Card:
-"""
-Holds a single Card variation.
-"""
+    """
+    Holds a single Card variation.
+    """
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
@@ -38,9 +38,9 @@ Holds a single Card variation.
 
 # DECK
 class Deck:
-"""
-A Deck of full 52 cards pack
-"""
+    """
+    A Deck of full 52 cards pack
+    """
     def __init__(self):
         self.all_cards = []
 
@@ -59,3 +59,31 @@ A Deck of full 52 cards pack
 
 
 # PLAYER
+class Player:
+    """
+    Each Player object will hold a current list of cards
+    A player should be able to add or remove cards from their hand.
+    """
+
+    def __init__(self, name):
+        self.name = name
+        self.all_cards = []
+
+    # A player "plays" a card from the "top" of the list.
+    def remove_one(self):
+        return self.all_cards.pop(0)
+
+    # Players will add cards to the "bottom" of the list.
+    def add_cards(self, new_cards):
+        if type([]) == type(new_cards):
+            # Multiple card objects
+            self.all_cards.extend(new_cards)
+        else:
+            # A single card objects
+            self.all_cards.append(new_cards)
+
+    def __str__(self):
+        return f'Player {self.name} has {len(self.all_cards)} cards.'
+
+
+
