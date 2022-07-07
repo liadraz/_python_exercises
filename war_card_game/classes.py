@@ -24,6 +24,7 @@ g_values = {
 
 # CARD
 class Card:
+
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
@@ -34,8 +35,20 @@ class Card:
 
 
 # DECK
+class Deck:
 
+    def __init__(self):
+        self.all_cards = []
 
+        # Create a new deck with 52 cards
+        for suit in g_suits:
+            for rank in g_ranks:
+                # Create the card object
+                created_card = Card(suit, rank)
+                self.all_cards.append(created_card)
+
+    def shuffle(self):
+        random.shuffle(self.all_cards)
 
 
 # PLAYER
