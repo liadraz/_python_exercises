@@ -24,7 +24,9 @@ g_values = {
 
 # CARD
 class Card:
-
+"""
+Holds a single Card variation.
+"""
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
@@ -36,7 +38,9 @@ class Card:
 
 # DECK
 class Deck:
-
+"""
+A Deck of full 52 cards pack
+"""
     def __init__(self):
         self.all_cards = []
 
@@ -52,5 +56,6 @@ class Deck:
 
     def deal_one(self):
         return self.all_cards.pop()
+
 
 # PLAYER
