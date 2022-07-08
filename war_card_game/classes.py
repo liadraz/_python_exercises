@@ -1,6 +1,7 @@
 """
 War Card Game
 Practicing OOP in python
+doClasses definitions
 """
 
 import random
