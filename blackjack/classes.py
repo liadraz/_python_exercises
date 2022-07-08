@@ -32,7 +32,6 @@ class Card:
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
-        self.value = g_values[rank]
 
     def __str__(self):
         return f"{self.rank} of {self.suit}"
@@ -79,8 +78,16 @@ class Hand:
         self.value = 0
         self.aces = 0
 
+    def __str__(self):
+        current_hold = ''
+        for card in self.cards:
+            current_hold += f'{card} | '
+
+        return current_hold
+
     def add_card(self, card):
-        pass
+        self.cards.append(card)
+        self.value += g_values[card.rank]
 
     def adjust_for_ace(self):
         pass
