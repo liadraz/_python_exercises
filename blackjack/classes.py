@@ -89,7 +89,32 @@ class Hand:
         self.cards.append(card)
         self.value += g_values[card.rank]
 
+    # Handle 'Ace' situation. Where it can be 1 or 11
     def adjust_for_ace(self):
-        pass
+        # Count how many aces user holds
+        for card in self.cards:
+            if 'Ace' == card.rank:
+                self.ace += 1
+
+        # When value exceeds above 21 convert ace value from 11 to 1
+        while self.value > 21 and self.aces:
+            self.value -= 10
+            self.aces -= 1
 
 
+# CHIP
+class Chip:
+    """
+    Track of player's starting chips, bets and ongoing winnings.
+    By default, user gets 100 coins
+    """
+
+    def __init__(self):
+        self.total = 100
+        self.bet = 0
+
+    def win_bet(self):
+        self.total += self.bet
+
+    def lose_bet(self):
+        self.total -= self.bet
