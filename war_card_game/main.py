@@ -89,3 +89,7 @@ def war_game():
                 for num in range(5):
                     player1_table_cards.append(player1.remove_one())
                     player2_table_cards.append(player2.remove_one())
+
+
+if __name__ == '__main__':
+    war_game()
