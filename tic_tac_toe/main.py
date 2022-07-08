@@ -100,7 +100,7 @@ def replay():
     return input("Do you want to play again? Enter Yes or No: ").lower().startswith('y')
 
 
-# main function - Run the game
+# MAIN function - Run the game
 def run():
     print('\t<<< Welcome to Tic Tac Toe >>>')
     print('\t<<< ---------------------- >>>\n')
