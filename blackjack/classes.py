@@ -15,6 +15,7 @@ g_ranks = (
     'Eight', 'Nine', 'Ten',
     'Jack', 'Queen', 'King', 'Ace'
     )
+# NOTE Ace in BlackJack can have both values 1 or 11. Depends on the hand
 g_values = {
     'Two': 2, 'Three': 3, 'Four': 4,
     'Five': 5, 'Six': 6, 'Seven': 7,
@@ -66,4 +67,22 @@ class Deck:
     def deal(self):
         return self.deck.pop()
 
+
 # HAND
+class Hand:
+    """
+    Class holds dealt cards of each player,
+    and calculates the value of those cards.
+    """
+    def __init__(self):
+        self.cards = []
+        self.value = 0
+        self.aces = 0
+
+    def add_card(self, card):
+        pass
+
+    def adjust_for_ace(self):
+        pass
+
+
