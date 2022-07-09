@@ -108,10 +108,9 @@ def replay():
 # The main gameplay function
 def game_play():
 
-    action = ' '
-    is_run = True
+    is_game_on = True
 
-    while is_run:
+    while is_game_on:
         print('\n<~<~<~ $ Welcome To BlackJack $ >~>~~>\n')
 
         # Create & shuffle the deck
@@ -138,6 +137,7 @@ def game_play():
 
         #
         # Start a round
+        action = ' '
         is_round = True
         while is_round:
 
@@ -151,7 +151,7 @@ def game_play():
 
             # Show cards. Keep one dealer card hidden
             show_some(player, dealer)
-            # Invoke here adjust_for_ace() ?!
+
             # If player's hand exceeds 21 player busted
             if player.value > 21:
                 player_busts(player_chips)
@@ -161,16 +161,27 @@ def game_play():
             #
             # Dealer's turn
             if "STAND" == action:
-                show_all(player, dealer)
 
                 # Dealer plays until reaches 17
-                hit(deck, dealer)
+                while dealer.value < 17:
+                    hit(deck, dealer)
+
+                show_all(player, dealer)
+
+                if dealer.value > 21:
+                    dealer_busts(player_chips)
+                elif dealer.value > player.value:
+                    dealer_wins(player_chips)
+                elif dealer.value < player.value:
+                    player_wins(player_chips)
+                else:
+                    push()
 
         # Inform player's total chips and cards.
         show_all(player, dealer)
         print(player_chips)
 
         # Ask to play again
-        is_round = replay()
+        is_game_on = replay()
 
 
