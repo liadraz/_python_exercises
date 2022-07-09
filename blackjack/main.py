@@ -4,7 +4,7 @@ Practicing OOP in python
 Main function - Implementation
 """
 
-from classes import Card, Deck, Hand, Chip
+from classes import Card, Deck, Hand, Chip, g_values
 
 
 def place_bet(chips_):
@@ -40,10 +40,10 @@ def ask_hit_or_stand():
     :return: string 'HIT', or 'STAND'.
     """
     while True:
-        action = input("Would you like to 'Hit' or 'Stand'?\nEnter H or S")
-        if action[0].upper == 'H':
+        action = input("\nWould you like to 'Hit' or 'Stand'?\n\tEnter H or S ")
+        if action[0].upper() == 'H':
             return "HIT"
-        elif action[0].upper == 'S':
+        elif action[0].upper() == 'S':
             return "STAND"
         else:
             print("Sorry, please try again.")
@@ -53,16 +53,18 @@ def show_some(player_, dealer_):
     """
     Show all player's cards, and only one card of the dealer.
     """
-    print(player_)
-    print(dealer_.cards[0])
+    print(f"\t___Player___\n{player_}")
+    print("\t___Dealer___")
+    print("<<HIDDEN CARD>>")
+    print(f"{g_values[dealer_.cards[0].rank]}-{dealer_.cards[0]}")
 
 
 def show_all(player_, dealer_):
     """
     Show all cards on table, and each hand's total value.
     """
-    print(player_)
-    print(dealer_)
+    print(f"\t___Player___\n{player_}")
+    print(f"\t___Dealer___\n{dealer_}")
 
 
 # Functions handle end of game scenarios
@@ -88,7 +90,6 @@ def dealer_wins(chips_):
 
 def push():
     print("Dealer and Player tie! It's a push.")
-
 
 
 def replay():
@@ -185,3 +186,5 @@ def game_play():
         is_game_on = replay()
 
 
+if __name__ == '__main__':
+    game_play()
