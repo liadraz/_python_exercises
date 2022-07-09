@@ -34,48 +34,75 @@ def hit(deck_, hand_):
     hand_.adjust_for_ace()
 
 
-def ask_hit_or_stand(deck_, hand_):
+def ask_hit_or_stand():
     """
     Asks the player whether he wants to Hit or Stand
-    :return: key 'HIT', or 'STAND'.
+    :return: string 'HIT', or 'STAND'.
     """
-    pass
+    while True:
+        action = input("Would you like to 'Hit' or 'Stand'?\nEnter H or S")
+        if action[0].upper == 'H':
+            return "HIT"
+        elif action[0].upper == 'S':
+            return "STAND"
+        else:
+            print("Sorry, please try again.")
 
 
 def show_some(player_, dealer_):
     """
-    Shows only Player's cards, the dealer's first card is hidden. Happens when the game starts,
-    and after each time Player takes a card.
+    Show all player's cards, and only one card of the dealer.
     """
-    pass
+    print(player_)
+    print(dealer_.cards[0])
 
 
 def show_all(player_, dealer_):
     """
-    Show all cards on table, and each hand's total value
+    Show all cards on table, and each hand's total value.
     """
-    pass
+    print(player_)
+    print(dealer_)
 
 
 # Functions handle end of game scenarios
-def player_busts():
-    pass
+def player_busts(chips_):
+    print("Player busts!")
+    chips_.lose_bet()
 
 
-def player_wins():
-    pass
+def player_wins(chips_):
+    print("Player wins!")
+    chips_.win_bet()
 
 
-def dealer_busts():
-    pass
+def dealer_busts(chips_):
+    print("Dealer busts!")
+    chips_.win_bet()
 
 
-def dealer_wins():
-    pass
+def dealer_wins(chips_):
+    print("Dealer wins!")
+    chips_.lose_bet()
+
+
+def push():
+    print("Dealer and Player tie! It's a push.")
+
 
 
 def replay():
-    pass
+    """
+    :return: boolean
+    """
+    while True:
+        answer = input("Would you like to play again? Enter Yes or No")
+        if answer[0].upper == 'Y':
+            return True
+        elif answer[0].upper == 'N':
+            return False
+        else:
+            print("Sorry, please try again.")
 
 
 # The main gameplay function
@@ -104,7 +131,7 @@ def game_play():
         player_chips = Chip()
 
         # Prompt the player for their bet
-        place_bet()
+        place_bet(player_chips)
 
         # Show some cards. Keep one dealer card hidden
         show_some(player, dealer)
@@ -117,9 +144,9 @@ def game_play():
             #
             # Player's turn
             # Prompt for player to Hit or Stand
-            action = ask_hit_or_stand(deck, player)
+            action = ask_hit_or_stand()
 
-            if action == "Hit":
+            if "HIT" == action:
                 hit(deck, player)
 
             # Show cards. Keep one dealer card hidden
@@ -127,14 +154,13 @@ def game_play():
             # Invoke here adjust_for_ace() ?!
             # If player's hand exceeds 21 player busted
             if player.value > 21:
-                player_busts()
-                dealer_wins()
+                player_busts(player_chips)
 
                 is_round = False
 
             #
             # Dealer's turn
-            if action == "Stand":
+            if "STAND" == action:
                 show_all(player, dealer)
 
                 # Dealer plays until reaches 17
