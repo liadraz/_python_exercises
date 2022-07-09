@@ -89,13 +89,12 @@ class Hand:
         self.cards.append(card)
         self.value += g_values[card.rank]
 
+        # Count encountered ace
+        if 'Ace' == card.rank:
+            self.aces += 1
+
     # Handle 'Ace' situation. Where it can be 1 or 11
     def adjust_for_ace(self):
-        # Count how many aces user holds
-        for card in self.cards:
-            if 'Ace' == card.rank:
-                self.aces += 1
-
         # When value exceeds above 21 convert ace value from 11 to 1
         while self.value > 21 and self.aces:
             self.value -= 10
