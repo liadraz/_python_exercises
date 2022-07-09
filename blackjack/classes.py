@@ -79,11 +79,11 @@ class Hand:
         self.aces = 0
 
     def __str__(self):
-        current_hold = ''
+        current_hold = 'Current Hand : \n'
         for card in self.cards:
-            current_hold += f'{card} | '
+            current_hold += f'{g_values[card.rank]}-{card} | '
 
-        return current_hold
+        return f'{current_hold}\n\nTotal - {self.value}'
 
     def add_card(self, card):
         self.cards.append(card)
@@ -94,7 +94,7 @@ class Hand:
         # Count how many aces user holds
         for card in self.cards:
             if 'Ace' == card.rank:
-                self.ace += 1
+                self.aces += 1
 
         # When value exceeds above 21 convert ace value from 11 to 1
         while self.value > 21 and self.aces:
@@ -109,12 +109,18 @@ class Chip:
     By default, user gets 100 coins
     """
 
-    def __init__(self):
-        self.total = 100
+    def __init__(self, total_=100):
+        self.total = total_
         self.bet = 0
+
+    def set_bet(self, bet_):
+        self.bet += bet_
 
     def win_bet(self):
         self.total += self.bet
+        self.bet = 0
 
     def lose_bet(self):
         self.total -= self.bet
+        self.bet = 0
+
