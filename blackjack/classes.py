@@ -113,6 +113,9 @@ class Chip:
         self.total = total_
         self.bet = 0
 
+    def __str__(self):
+        return f'{self.total}'
+
     def set_bet(self, bet_):
         self.bet += bet_
 
