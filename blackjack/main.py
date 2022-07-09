@@ -7,12 +7,21 @@ Main function - Implementation
 from classes import Card, Deck, Hand, Chip
 
 
-def place_bet():
+def place_bet(chips_):
     """
     NOTE User must have enough chips to make a bet
     :return: integer
     """
-    bet = int(input('Please, Place a bet : '))
+    while True:
+        try:
+            chips_.bet = int(input("Please, Place a bet : "))
+        except ValueError:
+            print("Invalid input. Please provide amount.")
+        else:
+            if chips_.bet > chips_.total:
+                print(f"Sorry, you don't have enough chips! {chips_.total}")
+            else:
+                break
 
 
 def hit(deck_, hand_):
@@ -21,7 +30,8 @@ def hit(deck_, hand_):
     anytime a Player requests a hit, or a Dealer's hand is
     less than 17.
     """
-    pass
+    hand_.add_card(deck_.deal())
+    hand_.adjust_for_ace()
 
 
 def ask_hit_or_stand(deck_, hand_):
@@ -114,7 +124,7 @@ def game_play():
 
             # Show cards. Keep one dealer card hidden
             show_some(player, dealer)
-
+            # Invoke here adjust_for_ace() ?!
             # If player's hand exceeds 21 player busted
             if player.value > 21:
                 player_busts()
@@ -128,14 +138,13 @@ def game_play():
                 show_all(player, dealer)
 
                 # Dealer plays until reaches 17
-                ask_hit_or_stand(deck, dealer)
-
+                hit(deck, dealer)
 
         # Inform player's total chips and cards.
         show_all(player, dealer)
         print(player_chips)
 
         # Ask to play again
-        is_run = replay()
+        is_round = replay()
 
 
