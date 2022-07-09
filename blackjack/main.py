@@ -4,29 +4,32 @@ Practicing OOP in python
 Main function - Implementation
 """
 
+from classes import Card, Deck, Hand, Chip
 
-def take_bet():
+
+def place_bet():
     """
     NOTE User must have enough chips to make a bet
     :return: integer
     """
-    pass
+    bet = int(input('Please, Place a bet : '))
 
 
 def hit(deck_, hand_):
     """
-    Thid function will be called during gameplay
+    This function will be called during gameplay
     anytime a Player requests a hit, or a Dealer's hand is
-    less than 17
+    less than 17.
     """
     pass
 
 
-def hit_or_stand(deck_, hand_):
+def ask_hit_or_stand(deck_, hand_):
     """
-    Asks the player whether her wants to Hit or Stand
+    Asks the player whether he wants to Hit or Stand
     :return: key 'HIT', or 'STAND'.
     """
+    pass
 
 
 def show_some(player_, dealer_):
@@ -39,13 +42,12 @@ def show_some(player_, dealer_):
 
 def show_all(player_, dealer_):
     """
-    Show all cards, and each hand's total value
+    Show all cards on table, and each hand's total value
     """
     pass
 
 
 # Functions handle end of game scenarios
-
 def player_busts():
     pass
 
@@ -62,35 +64,78 @@ def dealer_wins():
     pass
 
 
+def replay():
+    pass
+
+
 # The main gameplay function
 def game_play():
 
-    while True:
-        # Print an opening statement
+    action = ' '
+    is_run = True
+
+    while is_run:
+        print('\n<~<~<~ $ Welcome To BlackJack $ >~>~~>\n')
 
         # Create & shuffle the deck
+        deck = Deck()
+        deck.shuffle()
+
+        # Set up player and dealer
+        player = Hand()
+        dealer = Hand()
 
         # deal two cards to each player
+        for i in range(2):
+            player.add_card(deck.deal())
+            dealer.add_card(deck.deal())
 
         # Set up the Player's chips
+        player_chips = Chip()
 
         # Prompt the player for their bet
+        place_bet()
 
-        # Show cards. Keep one dealer card hidden
+        # Show some cards. Keep one dealer card hidden
+        show_some(player, dealer)
 
-        while is_playing:
+        #
+        # Start a round
+        is_round = True
+        while is_round:
+
+            #
+            # Player's turn
             # Prompt for player to Hit or Stand
+            action = ask_hit_or_stand(deck, player)
+
+            if action == "Hit":
+                hit(deck, player)
 
             # Show cards. Keep one dealer card hidden
+            show_some(player, dealer)
 
-            # If player's hand exceeds 21, run player_busts()
-            # and break up the loop
+            # If player's hand exceeds 21 player busted
+            if player.value > 21:
+                player_busts()
+                dealer_wins()
 
-            # If player hasn't busted, play dealer's hand until Dealer reaches 17
+                is_round = False
 
-                # Show all cards
-                # Run different winning scenarios
+            #
+            # Dealer's turn
+            if action == "Stand":
+                show_all(player, dealer)
 
-            # Inform Player of their chips total
+                # Dealer plays until reaches 17
+                ask_hit_or_stand(deck, dealer)
 
-            # Ask to play again
+
+        # Inform player's total chips and cards.
+        show_all(player, dealer)
+        print(player_chips)
+
+        # Ask to play again
+        is_run = replay()
+
+
