@@ -79,11 +79,11 @@ class Hand:
         self.aces = 0
 
     def __str__(self):
-        current_hold = 'Current Hand : \n'
+        current_hold = ''
         for card in self.cards:
             current_hold += f'{g_values[card.rank]}-{card} | '
 
-        return f'{current_hold}\n\nTotal - {self.value}'
+        return f'{current_hold}\nTotal = {self.value}'
 
     def add_card(self, card):
         self.cards.append(card)
