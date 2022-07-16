@@ -97,10 +97,11 @@ def replay():
     :return: boolean
     """
     while True:
-        answer = input("Would you like to play again? Enter Yes or No")
-        if answer[0].upper == 'Y':
+        answer = input("\nWould you like to play again? Enter Yes or No ")
+
+        if answer[0].lower() == 'y':
             return True
-        elif answer[0].upper == 'N':
+        elif answer[0].lower() == 'n':
             return False
         else:
             print("Sorry, please try again.")
@@ -137,48 +138,53 @@ def game_play():
         show_some(player, dealer)
 
         #
-        # Start a round
-        action = ' '
-        is_round = True
-        while is_round:
+        # Player's turn
+        actions = ' '
+        player_turns = True
+        while player_turns:
 
-            #
-            # Player's turn
             # Prompt for player to Hit or Stand
             action = ask_hit_or_stand()
 
             if "HIT" == action:
                 hit(deck, player)
 
-            # Show cards. Keep one dealer card hidden
-            show_some(player, dealer)
+                # Show cards. Keep one dealer card hidden
+                show_some(player, dealer)
 
-            # If player's hand exceeds 21 player busted
-            if player.value > 21:
-                player_busts(player_chips)
+                # If player's hand exceeds 21 player busted
+                if player.value > 21:
+                    player_busts(player_chips)
+                    break
 
-                is_round = False
+            elif "STAND" == action:
+                player_turns = False
 
-            #
-            # Dealer's turn
-            if "STAND" == action:
+        #
+        # Dealer's turn
+        while not player_turns:
 
-                # Dealer plays until reaches 17
-                while dealer.value < 17:
-                    hit(deck, dealer)
+            # Dealer plays until reaches 17
+            while dealer.value < 17:
+                hit(deck, dealer)
 
-                show_all(player, dealer)
+            show_all(player, dealer)
 
-                if dealer.value > 21:
-                    dealer_busts(player_chips)
-                elif dealer.value > player.value:
-                    dealer_wins(player_chips)
-                elif dealer.value < player.value:
-                    player_wins(player_chips)
-                else:
-                    push()
+            if dealer.value > 21:
+                dealer_busts(player_chips)
+            elif dealer.value > player.value:
+                dealer_wins(player_chips)
+            elif dealer.value < player.value:
+                player_wins(player_chips)
+            else:
+                push()
+
+            player_turns = True
 
         # Inform player's total chips and cards.
+        print("\n\n")
+        print("Conclusion")
+        print("--------------------------------------")
         show_all(player, dealer)
         print(player_chips)
 
