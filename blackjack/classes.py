@@ -113,7 +113,7 @@ class Chip:
         self.bet = 0
 
     def __str__(self):
-        return f'Total chips <{self.total}>'
+        return f'\nTotal chips <{self.total}>'
 
     def set_bet(self, bet_):
         self.bet += bet_
